@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputBox from "../components/InputBox";
+import SubmitButton from "../components/SubmitButton";
 import { useState } from "react";
 
 export default function Register() {
@@ -28,14 +29,7 @@ export default function Register() {
             <InputBox text="Email" keyboardType="email-address" form={form} setForm={setForm} LowerCase={true} />
             <InputBox text="Password" secureTextEntry={hidepassword} password={true} setPasswordVisible={setHidePassword} PasswordVisible={hidepassword} form={form} setForm={setForm} />
             <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
-            <TouchableOpacity onPress={handleSignUp}>
-                <LinearGradient
-                    // Button Linear Gradient
-                    colors={['#FEBB24', '#E5C98A']}
-                    style={styles.button} end={{ x: 1, y: 0 }}>
-                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>Sign Up</Text>
-                </LinearGradient>
-            </TouchableOpacity>
+            <SubmitButton text="Sign Up" onPress={handleSignUp} />
         </View>
     );
 }
@@ -47,14 +41,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20
-    },
-    button: {
-        width: 100,
-        height: 50,
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 4,
-        marginTop: 20,
     }
 })
