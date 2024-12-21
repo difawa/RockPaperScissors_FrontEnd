@@ -1,22 +1,22 @@
 import { Link } from "expo-router";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import InputBox from "../components/InputBox";
 
 export default function Register() {
     return (
         <View style={styles.container}>
             <Image source={require('../assets/images/logo.png')} />
 
-            <TextInput placeholder="Username" style={styles.input} />
-            <TextInput placeholder="Email" keyboardType="email-address" style={styles.input} />
-            <TextInput placeholder="Password" keyboardType="password" style={styles.input} secureTextEntry={true} />
+            <InputBox text="Username" />
+            <InputBox text="Email" />
+            <InputBox text="Password" />
             <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
-            <TouchableOpacity style={styles.button}><Text style={{ color: '#fff' }}>Register</Text></TouchableOpacity>
             <LinearGradient
                 // Button Linear Gradient
                 colors={['#FEBB24', '#E5C98A']}
-                style={styles.button} >
-                <Text>Register</Text>
+                style={styles.button} end={{ x: 1, y: 0 }}>
+                <Text style={{ color: '#fff', fontWeight: 'bold' }}>Sign Up</Text>
             </LinearGradient>
         </View>
     );
