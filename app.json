@@ -4,6 +4,7 @@
     "slug": "RockPaperScissors_FrontEnd",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "RockPaperScissors_FrontEnd",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
