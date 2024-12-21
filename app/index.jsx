@@ -8,14 +8,9 @@ import { Link } from 'expo-router';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-// Set the animation options. This is optional.
-// SplashScreen.setOptions({
-//   duration: 1000,
-//   fade: true,
-// });
-
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
 
   useEffect(() => {
     async function prepare() {
@@ -24,7 +19,7 @@ export default function App() {
         await Font.loadAsync(Entypo.font);
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {

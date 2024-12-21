@@ -9,9 +9,9 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/hof_icon.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#2596BE"
+      "backgroundColor": "#1A1C22"
     },
     "ios": {
       "supportsTablet": true
