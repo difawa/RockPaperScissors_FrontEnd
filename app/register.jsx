@@ -13,7 +13,7 @@ export default function Register() {
 
             <InputBox text="Username" />
             <InputBox text="Email" keyboardType="email-address" />
-            <InputBox text="Password" secureTextEntry={hidepassword} />
+            <InputBox text="Password" secureTextEntry={hidepassword} password={true} setPasswordVisible={setHidePassword} PasswordVisible={hidepassword} />
             <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
             <LinearGradient
                 // Button Linear Gradient
@@ -32,17 +32,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20
-    },
-    input: {
-        width: '100%',
-        height: 50,
-        borderColor: '#ddd',
-        borderWidth: 1,
-        backgroundColor: '#7C5F1E',
-        marginVertical: 10,
-        borderRadius: 100,
-        paddingHorizontal: 20,
-        color: '#fff',
     },
     button: {
         width: 100,
