@@ -52,10 +52,18 @@ export default function App() {
 
   return (
     <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      style={styles.container}
       onLayout={onLayoutRootView}>
       <Text>SplashScreen Demo! 👋</Text>
       <Entypo name="rocket" size={30} />
     </View>
   );
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+};
