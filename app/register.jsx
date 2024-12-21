@@ -6,21 +6,29 @@ import { useState } from "react";
 
 export default function Register() {
     const [hidepassword, setHidePassword] = useState(true);
+    const [form, setForm] = useState({ username: "", email: "", password: "" });
+
+    const handleSignUp = () => {
+        console.log("Form Data:", form); // Debugging
+        // Lakukan validasi atau pengiriman data ke backend
+    };
 
     return (
         <View style={styles.container}>
             <Image source={require('../assets/images/logo.png')} />
 
-            <InputBox text="Username" />
-            <InputBox text="Email" keyboardType="email-address" />
-            <InputBox text="Password" secureTextEntry={hidepassword} password={true} setPasswordVisible={setHidePassword} PasswordVisible={hidepassword} />
+            <InputBox text="Username" form={form} setForm={setForm} LowerCase={true} />
+            <InputBox text="Email" keyboardType="email-address" form={form} setForm={setForm} LowerCase={true} />
+            <InputBox text="Password" secureTextEntry={hidepassword} password={true} setPasswordVisible={setHidePassword} PasswordVisible={hidepassword} form={form} setForm={setForm} />
             <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
-            <LinearGradient
-                // Button Linear Gradient
-                colors={['#FEBB24', '#E5C98A']}
-                style={styles.button} end={{ x: 1, y: 0 }}>
-                <Text style={{ color: '#fff', fontWeight: 'bold' }}>Sign Up</Text>
-            </LinearGradient>
+            <TouchableOpacity onPress={handleSignUp}>
+                <LinearGradient
+                    // Button Linear Gradient
+                    colors={['#FEBB24', '#E5C98A']}
+                    style={styles.button} end={{ x: 1, y: 0 }}>
+                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>Sign Up</Text>
+                </LinearGradient>
+            </TouchableOpacity>
         </View>
     );
 }

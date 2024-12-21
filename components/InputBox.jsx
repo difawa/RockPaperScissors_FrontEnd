@@ -2,16 +2,28 @@ import { Text, TextInput, StyleSheet, TouchableOpacity, View } from "react-nativ
 import IonIcons from '@expo/vector-icons/Ionicons';
 
 export default function InputBox(props) {
+    const validateInput = (value) => {
+        if (props.keyboardType === "email-address") {
+            return /^[a-zA-Z0-9\@\.\-\_]+$/.test(value);
+        } else if (props.text === "Username") {
+            return /^[a-zA-Z0-9\.\_]+$/.test(value);
+        }
+        else {
+            return true;
+        }
+    };
     return (
         <>
             <Text style={{ color: '#fff', alignSelf: 'flex-start', paddingLeft: 20 }}>{props.text}<Text style={{ color: 'red' }}>*</Text></Text>
-            <View style={{width: '100%'}}>
+            <View style={{ width: '100%' }}>
                 <TextInput placeholder={props.text}
                     style={styles.input}
                     keyboardType={props.keyboardType}
                     secureTextEntry={props.secureTextEntry}
                     autoCapitalize="none"
-                    autoCorrect={false} />
+                    autoCorrect={false}
+                    value={props.form[props.text.toLowerCase()]}
+                    onChangeText={(text) => { if (validateInput(text) || text === '') { props.setForm({ ...props.form, [props.text.toLowerCase()]: props.LowerCase ? text.toLowerCase() : text }) } }} />
                 {props.password &&
                     <TouchableOpacity
                         onPress={() => props.setPasswordVisible(!props.PasswordVisible)}
