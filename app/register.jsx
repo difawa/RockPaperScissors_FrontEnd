@@ -13,8 +13,12 @@ export default function Register() {
         if (!form.username || !form.email || !form.password) {
             Alert.alert("Validation Error", "Please fill in all fields before signing up.");
             return;
+        } else if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email) == false
+        ) {
+            Alert.alert("Validation Error", "Please enter a valid email address.");
+            return;
         }
-    
+
         // Jika semua input terisi, lanjutkan proses
         console.log("Form Data:", form); // Debugging
         Alert.alert("Success", "Your account has been created!");
