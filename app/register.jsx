@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 
 export default function Register() {
@@ -7,7 +8,8 @@ export default function Register() {
 
             <TextInput placeholder="Username" style={styles.input}/>
             <TextInput placeholder="Email" keyboardType="email-address" style={styles.input}/>
-            <TextInput placeholder="Password" keyboardType="password" style={styles.input} />
+            <TextInput placeholder="Password" keyboardType="password" style={styles.input} secureTextEntry={true}/>
+            <Text>Already have an account? <Link href={"/"}><Text>Login here</Text></Link></Text>
             <TouchableOpacity style={styles.button}><Text style={{color: '#fff'}}>Register</Text></TouchableOpacity>
         </View>
     );
