@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputBox from "../components/InputBox";
 import { useState } from "react";
@@ -9,8 +9,15 @@ export default function Register() {
     const [form, setForm] = useState({ username: "", email: "", password: "" });
 
     const handleSignUp = () => {
+        if (!form.username || !form.email || !form.password) {
+            Alert.alert("Validation Error", "Please fill in all fields before signing up.");
+            return;
+        }
+    
+        // Jika semua input terisi, lanjutkan proses
         console.log("Form Data:", form); // Debugging
-        // Lakukan validasi atau pengiriman data ke backend
+        Alert.alert("Success", "Your account has been created!");
+        // Lakukan validasi tambahan atau pengiriman data ke backend di sini
     };
 
     return (
