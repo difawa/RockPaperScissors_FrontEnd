@@ -5,7 +5,7 @@ export default function InputBox(props) {
     return (
         <>
             <Text style={{ color: '#fff', alignSelf: 'flex-start', paddingLeft: 20 }}>{props.text}<Text style={{ color: 'red' }}>*</Text></Text>
-            <TextInput placeholder={props.text} style={styles.input} />
+            <TextInput placeholder={props.text} style={styles.input} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize="none" />
         </>
     )
 }

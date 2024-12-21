@@ -2,15 +2,18 @@ import { Link } from "expo-router";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputBox from "../components/InputBox";
+import { useState } from "react";
 
 export default function Register() {
+    const [hidepassword, setHidePassword] = useState(true);
+
     return (
         <View style={styles.container}>
             <Image source={require('../assets/images/logo.png')} />
 
             <InputBox text="Username" />
-            <InputBox text="Email" />
-            <InputBox text="Password" />
+            <InputBox text="Email" keyboardType="email-address" />
+            <InputBox text="Password" secureTextEntry={hidepassword} />
             <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
             <LinearGradient
                 // Button Linear Gradient
