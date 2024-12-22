@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputBox from "../components/InputBox";
@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function Register() {
     const [hidepassword, setHidePassword] = useState(true);
     const [form, setForm] = useState({ username: "", email: "", password: "" });
+    const router = useRouter();
 
     const handleSignUp = () => {
         if (!form.username || !form.email || !form.password) {
@@ -18,11 +19,12 @@ export default function Register() {
             Alert.alert("Validation Error", "Please enter a valid email address.");
             return;
         }
-
+        
         // Jika semua input terisi, lanjutkan proses
         console.log("Form Data:", form); // Debugging
-        Alert.alert("Success", "Your account has been created!");
+        Alert.alert("Success", "Your account has been created! Login now and play the game!");
         // Lakukan validasi tambahan atau pengiriman data ke backend di sini
+        router.push("");
     };
 
     return (
@@ -32,7 +34,7 @@ export default function Register() {
             <InputBox text="Username" form={form} setForm={setForm} LowerCase={true} />
             <InputBox text="Email" keyboardType="email-address" form={form} setForm={setForm} LowerCase={true} />
             <InputBox text="Password" secureTextEntry={hidepassword} password={true} setPasswordVisible={setHidePassword} PasswordVisible={hidepassword} form={form} setForm={setForm} />
-            <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={""}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
+            <Text style={{ color: '#fff', alignSelf: 'flex-start' }}>Already have an account? <Link href={"/"}><Text style={{ color: '#FEBB24', fontWeight: 'bold' }}>Login here</Text></Link></Text>
             <SubmitButton text="Sign Up" onPress={handleSignUp} />
         </View>
     );

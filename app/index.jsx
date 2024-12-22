@@ -4,8 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import InputBox from '../components/InputBox';
 import SubmitButton from '../components/SubmitButton';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -14,6 +13,7 @@ export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [hidepassword, setHidePassword] = useState(true);
+  const router = useRouter();
 
   const handleSignIn = () => {
           if (!form.email || !form.password) {
@@ -24,6 +24,7 @@ export default function App() {
           console.log("Form Data:", form); 
           Alert.alert("Success", "Next, let's play the game!");
           // Lakukan validasi tambahan atau pengiriman data ke backend di sini
+          router.replace("/main-menu");
       };
 
   useEffect(() => {
