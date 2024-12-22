@@ -9,6 +9,7 @@ export default function RootLayout() {
         <Stack.Screen name="register" options={{ headerShown: false }} />
         <Stack.Screen name="main-menu" options={{ headerShown: false }} />
         <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
+        <Stack.Screen name="in-game" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="light" hidden />
     </>

@@ -20,7 +20,7 @@ export default function MainMenu() {
                 <Text style={{ ...styles.title, color: '#fff' }}>Fate</Text>
             </View>
 
-            <MenuButton text="START" />
+            <MenuButton text="START" onPress={() => router.push('/in-game')} />
             <MenuButton text="LEADERBOARD" onPress={() => router.push('/leaderboard')} />
             <MenuButton text="EXIT" onPress={() => router.replace('/')} />
 
