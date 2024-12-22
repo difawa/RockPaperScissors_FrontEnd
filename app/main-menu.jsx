@@ -2,12 +2,13 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import MenuButton from "../components/MenuButton";
 import Svg, { Path } from "react-native-svg";
 import toplogo from '../assets/images/toplogo.png'
+import { useRouter } from "expo-router";
 
 export default function MainMenu() {
+    const router = useRouter();
     return (
         <View style={styles.container}>
             <Image source={toplogo} style={{ position: 'absolute', top: 20, width: '210', height: '240', resizeMode: 'contain' }} />
-
             <Svg width="100%" height="100" preserveAspectRatio="none"
                 viewBox="0 0 393 137" fill="none"
                 xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 130 }}>
@@ -20,16 +21,12 @@ export default function MainMenu() {
             </View>
 
             <MenuButton text="START" />
-            <MenuButton text="LEADERBOARD" />
-            <MenuButton text="EXIT" />
+            <MenuButton text="LEADERBOARD" onPress={() => router.push('/leaderboard')} />
+            <MenuButton text="EXIT" onPress={() => router.replace('/')} />
 
-            <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', bottom: 30, width: '100%' }}>
+            <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', bottom: 60, width: '100%' }}>
                 <Path fill-rule="evenodd" clip-rule="evenodd" d="M393 129.764L8.22544e-06 0V39.4221L393 144L393 129.764Z" fill="#D7E773" />
             </Svg>
-
-
-
-
         </View>
     );
 }
@@ -49,6 +46,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 60,
-        fontWeight: '900'
+        fontWeight: '900',
+        margin: -4
     }
 })
