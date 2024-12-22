@@ -1,18 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function MenuButton(props) {
+export default function MenuButton({onPress, text, color, color2}) {
     return (
-        <TouchableOpacity onPress={props.onPress} style={styles.button}>
-            <Text style={styles.buttonText}>{props.text}</Text>
+        <TouchableOpacity onPress={onPress} style={{...styles.button, backgroundColor: color}}>
+            <Text style={styles.buttonText}>{text}</Text>
             <View
                 style={[
-                    styles.ellipse,
+                    {...styles.ellipse, backgroundColor: color2},
                     { transform: [{ rotate: '38deg' }] }, // Putar elips 45 derajat
                 ]}
             ></View>
             <View
                 style={[
-                    styles.ellipse2,
+                    {...styles.ellipse2, backgroundColor: color2},
                     { transform: [{ rotate: '-45deg' }] }, // Putar elips 45 derajat
                 ]}
             ></View>
@@ -22,7 +22,6 @@ export default function MenuButton(props) {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#FEBB24',
         height: 70,
         width: 220,
         borderRadius: 36,
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
         width: 22,
         height: 11,
         borderRadius: '100%',
-        backgroundColor: '#D7E773',
         position: 'absolute',
         top: 8,
         right: 9
@@ -53,7 +51,6 @@ const styles = StyleSheet.create({
         width: 16,
         height: 12,
         borderRadius: '100%',
-        backgroundColor: '#D7E773',
         position: 'absolute',
         top: 12,
         left: 8
