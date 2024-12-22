@@ -8,7 +8,7 @@ export default function MainMenu() {
     const router = useRouter();
     return (
         <View style={styles.container}>
-            <Image source={toplogo} style={{ position: 'absolute', top: 20, width: '210', height: '240', resizeMode: 'contain' }} />
+            <Image source={toplogo} style={{ position: 'absolute', top: 25, width: '170', height: '190', resizeMode: 'contain' }} />
             <Svg width="100%" height="100" preserveAspectRatio="none"
                 viewBox="0 0 393 137" fill="none"
                 xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 110 }}>
