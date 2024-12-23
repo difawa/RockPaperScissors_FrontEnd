@@ -9,6 +9,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     'BlackHanSans': require('../assets/fonts/BlackHanSans.ttf'),
+    'BlackOpsOne' : require('../assets/fonts/BlackOpsOne.ttf'),
+    'CabinSketch-Regular' : require('../assets/fonts/CabinSketch-Regular.ttf')
   });
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
-  
+
   return (
     <>
       <Stack>
@@ -28,6 +30,7 @@ export default function RootLayout() {
         <Stack.Screen name="register" options={{ headerShown: false }} />
         <Stack.Screen name="main-menu" options={{ headerShown: false }} />
         <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
+        <Stack.Screen name="mode" options={{ headerShown: false }} />
         <Stack.Screen name="in-game" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="light" />
