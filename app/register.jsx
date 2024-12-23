@@ -1,18 +1,10 @@
 import { Link, useRouter } from "expo-router";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Alert,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text,  View, Image, Alert} from "react-native";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { useState } from "react";
 import axios from "axios";
+import { LOCALHOST } from "@env";
 
 export default function Register() {
   const [hidepassword, setHidePassword] = useState(true);
