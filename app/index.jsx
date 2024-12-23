@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Text, View, Image, TouchableOpacity, Alert } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import InputBox from "../components/InputBox";
-import SubmitButton from "../components/SubmitButton";
-import { Link, useRouter } from "expo-router";
-import { z } from "zod";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState } from 'react';
+import { Text, View, Image, TouchableOpacity, Alert } from 'react-native';
+import InputBox from '../components/InputBox';
+import SubmitButton from '../components/SubmitButton';
+import { Link, useRouter } from 'expo-router';
+import { z } from 'zod';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -20,10 +19,7 @@ export default function App() {
 
   const handleSignIn = async () => {
     if (!form.email || !form.password) {
-      Alert.alert(
-        "Validation Error",
-        "Please fill in all fields before signing in."
-      );
+      Alert.alert("Validation Error", "Please fill in all fields before signing in.");
       return;
     }
     try {
