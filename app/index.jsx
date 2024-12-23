@@ -43,7 +43,7 @@ export default function App() {
         await AsyncStorage.setItem("userToken", token);
         Alert.alert("Login berhasil dan token tersimpan!");
 
-        router.push("(home)"); //Ntar ganti ya maukemana
+        router.push("/main-menu");
       } else {
         Alert.alert("Login Gagal", data.message || "Error terjadi.");
       }
