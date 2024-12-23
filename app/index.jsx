@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Text, View, Image, TouchableOpacity, Alert } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Text, View, Image, Alert } from "react-native";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useRouter } from "expo-router";
 import axios from "axios";
 
+import { LOCALHOST } from '@env'
+
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [hidepassword, setHidePassword] = useState(true);
   const router = useRouter();
@@ -24,7 +24,7 @@ export default function App() {
     try {
       // Kirim permintaan login ke backend menggunakan axios
       const response = await axios.post(
-        "http://192.168.43.82:4000/auth/login",
+        `http://${LOCALHOST}:4000/auth/login`,
         {
           email: form.email,
           password: form.password,

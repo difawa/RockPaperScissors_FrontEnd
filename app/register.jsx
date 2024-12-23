@@ -42,7 +42,7 @@ export default function Register() {
     try {
       // Kirim data ke API
       const response = await axios.post(
-        "http://192.168.43.82:4000/auth/register",
+        `http://${LOCALHOST}:4000/auth/register`,
         {
           username: form.username,
           email: form.email,
