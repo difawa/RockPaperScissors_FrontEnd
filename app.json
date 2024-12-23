@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.difawa.RockPaperScissors_FrontEnd"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,7 +39,23 @@
           },
           "imageWidth": 200
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/BlackHanSans.ttf"
+          ]
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "dcae56a5-82a9-4f34-be2d-11730234569c"
+      }
+    }
   }
 }

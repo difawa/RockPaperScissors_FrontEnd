@@ -4,6 +4,12 @@ import Svg, { Path } from "react-native-svg";
 import toplogo from '../assets/images/toplogo.png'
 import { useRouter } from "expo-router";
 
+const user = {
+    id: 1,
+    username: "difawinanda",
+    email: "N6dLx@example.com"
+}
+
 export default function MainMenu() {
     const router = useRouter();
     return (
@@ -16,12 +22,12 @@ export default function MainMenu() {
             </Svg>
 
             <View style={styles.titleContainer}>
-                <Text style={{ ...styles.title, color: '#FEBB24' }}>Hand of</Text>
-                <Text style={{ ...styles.title, color: '#fff' }}>Fate</Text>
+                <Text style={styles.title}>Hand of Fate</Text>
+                <Text style={styles.welcome}>WELCOME, {user.username}</Text>
             </View>
 
             <MenuButton text="START" onPress={() => router.push('/in-game')} color='#FEBB24' color2="#D7E773" />
-            <MenuButton text="LEADERBOARD" onPress={() => router.push('/leaderboard')}  color='#FEBB24' color2="#D7E773" />
+            <MenuButton text="LEADERBOARD" onPress={() => router.push('/leaderboard')} color='#FEBB24' color2="#D7E773" />
             <MenuButton text="EXIT" onPress={() => router.replace('/')} color='#F80000' color2="#E87575" />
 
             <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', bottom: 40, width: '100%' }}>
@@ -41,12 +47,18 @@ const styles = StyleSheet.create({
     titleContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20,
-        marginTop: 20,
+        marginBottom: 30,
+        marginTop: 60
     },
     title: {
-        fontSize: 60,
-        fontWeight: '900',
-        margin: -4
+        fontSize: 40,
+        color: '#FEBB24',
+        fontFamily: 'BlackHanSans'
+    },
+    welcome: {
+        color: '#fff',
+        fontSize: 25,
+        fontFamily: 'BlackHanSans',
+        marginTop: 10
     }
 })
