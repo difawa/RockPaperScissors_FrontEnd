@@ -1,13 +1,5 @@
 import { Link, useRouter } from "expo-router";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput, Image, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
