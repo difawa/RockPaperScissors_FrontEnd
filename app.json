@@ -24,7 +24,7 @@
       "package": "com.difawa.RockPaperScissors_FrontEnd"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",

@@ -1,4 +1,5 @@
-import { Stack } from "expo-router";
+import { Stack, Slot } from "expo-router";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -26,16 +27,19 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="register" options={{ headerShown: false }} />
-        <Stack.Screen name="main-menu" options={{ headerShown: false }} />
-        <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
-        <Stack.Screen name="mode" options={{ headerShown: false }} />
-        <Stack.Screen name="in-game" options={{ headerShown: false }} />
-        <Stack.Screen name="RR_draw" options={{ headerShown: false }} />
-      </Stack>
+      <SafeAreaView style={styles.container}>
+        <Slot />
+      </SafeAreaView>
       <StatusBar style="light" />
     </>
   );
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: "#1A1C22",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+};
