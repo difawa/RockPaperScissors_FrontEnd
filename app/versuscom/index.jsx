@@ -38,7 +38,7 @@ const compareChoices = (user, com) => {
     else { return "You Lose"; }
 };
 
-export default function MainMenu() {
+export default function VersusCom() {
     const [choices, setChoices] = useState({ user: '', com: '' });
     const [scores, setScores] = useState({ user: 0, com: 0 });
     const [result, setResult] = useState("");
@@ -48,18 +48,26 @@ export default function MainMenu() {
         const comChoice = comGenerator();
         const gameResult = compareChoices(userChoice, comChoice);
         setChoices({ user: userChoice, com: comChoice });
-        setResult(gameResult); if (gameResult === "You Win") {
+        setResult(gameResult);
+        if (gameResult === "You Win") {
             setScores(prevScores => {
-                const newScores = { ...prevScores, user: prevScores.user + 1 }; if (newScores.user === 5) {
+                const newScores = { ...prevScores, user: prevScores.user + 1 };
+                if (newScores.user === 5) {
                     Alert.alert("Congratulations!", "You won the game!");
-                    return { user: 0, com: 0 }; // Reset skor setelah menang
-                } return newScores;
+                    router.push('/mode');
+                    // return { user: 0, com: 0 }; // Reset skor setelah menang
+                }
+                return newScores;
             });
         } else if (gameResult === "You Lose") {
             setScores(prevScores => {
-                const newScores = { ...prevScores, com: prevScores.com + 1 }; if (newScores.com === 5) {
-                    Alert.alert("Game Over", "The computer won the game."); return { user: 0, com: 0 }; // Reset skor setelah kalah
-                } return newScores;
+                const newScores = { ...prevScores, com: prevScores.com + 1 };
+                if (newScores.com === 5) {
+                    Alert.alert("Game Over", "The computer won the game.");
+                    router.push('/mode');
+                    // return { user: 0, com: 0 }; // Reset skor setelah kalah
+                }
+                return newScores;
             });
         }
     }
