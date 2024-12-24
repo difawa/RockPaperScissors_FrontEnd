@@ -27,7 +27,7 @@ export default function Mode() {
             <Text style={styles.or}>O<Text style={{ color: '#FFF' }}>R</Text></Text>
             <Image source={vsuser} style={styles.vs} />
 
-            <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" preserveAspectRatio="none">
                 <Path d="M393 129.764L8.22544e-06 0V39.4221L393 144L393 129.764Z" fill="#D7E773" />
             </Svg>
 

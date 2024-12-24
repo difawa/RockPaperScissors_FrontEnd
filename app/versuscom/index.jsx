@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import rock from '../../assets/images/rock.png';
 import paper from '../../assets/images/paper.png';
 import scissors from '../../assets/images/scissor.png';
-import scorebg from '../../assets/images/score.png'
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
@@ -14,12 +13,7 @@ import userScissors from '../../assets/images/userscissors.png'
 import comPaper from '../../assets/images/compaper.png'
 import comRock from '../../assets/images/comrock.png'
 import comScissors from '../../assets/images/comscissors.png'
-
-const user = {
-    id: 1,
-    username: "difawinanda",
-    email: "N6dLx@example.com"
-}
+import Score from "../../components/Score";
 
 const options = ["rock", "scissors", "paper"];
 const comGenerator = () => {
@@ -44,6 +38,12 @@ export default function VersusCom() {
     const [result, setResult] = useState("");
     const router = useRouter();
 
+    useEffect(() => {
+        if (scores.user === 5 || scores.com === 5) {
+            router.push('/mode');
+        }
+    }, [scores]);
+    
     const handleChoice = (userChoice) => {
         const comChoice = comGenerator();
         const gameResult = compareChoices(userChoice, comChoice);
@@ -54,8 +54,6 @@ export default function VersusCom() {
                 const newScores = { ...prevScores, user: prevScores.user + 1 };
                 if (newScores.user === 5) {
                     Alert.alert("Congratulations!", "You won the game!");
-                    router.push('/mode');
-                    // return { user: 0, com: 0 }; // Reset skor setelah menang
                 }
                 return newScores;
             });
@@ -64,8 +62,6 @@ export default function VersusCom() {
                 const newScores = { ...prevScores, com: prevScores.com + 1 };
                 if (newScores.com === 5) {
                     Alert.alert("Game Over", "The computer won the game.");
-                    router.push('/mode');
-                    // return { user: 0, com: 0 }; // Reset skor setelah kalah
                 }
                 return newScores;
             });
@@ -75,8 +71,7 @@ export default function VersusCom() {
     return (
         <>
             <Svg width="100%" height="100" preserveAspectRatio="none"
-                viewBox="0 0 393 137" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                viewBox="0 0 393 137" fill="none">
                 <Path d="M0 123.456L393 0V37.5057L0 137L0 123.456Z" fill="#D7E773" />
             </Svg>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -91,10 +86,8 @@ export default function VersusCom() {
                     {choices.user === 'scissors' && <Image source={userScissors} style={{ width: 100 }} />}
                 </View>
             </View>
-            <View style={styles.scoreContainer}>
-                <Image source={scorebg} style={{ width: 139, height: 42 }} />
-                <Text style={styles.textScores}>{scores.user} : {scores.com}</Text>
-            </View>
+            
+            <Score playerScore={scores.user} enemyScore={scores.com} />
 
             <Text style={styles.select}>SELECT ONE :</Text>
             <View style={styles.imageContainer}>
@@ -104,7 +97,7 @@ export default function VersusCom() {
                 <TouchableOpacity onPress={() => handleChoice('scissors')}>
                     <Image source={scissors} resizeMode="contain" style={{ width: 100 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => handleChoice('paper')} >
+                <TouchableOpacity onPress={() => handleChoice('paper')} >
                     <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
                 </TouchableOpacity>
             </View>
@@ -131,14 +124,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '80%'
-    },
-    scoreContainer: { marginTop: -5, alignItems: 'center', justifyContent: 'center' },
-    textScores: {
-        color: '#FFF',
-        fontFamily: 'BlackOpsOne',
-        position: 'absolute',
-        fontSize: 20,
-        textShadow: '-1px 1px 10px black',
     },
     textResult: { fontSize: 40, fontFamily: 'BlackOpsOne', color: '#FFF', textShadow: '-1px 1px 10px black' }
 })
