@@ -35,9 +35,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold',
-        textShadowColor: '#4F4F4F', // warna bayangan
-        textShadowOffset: { width: 0, height: 3 }, // posisi bayangan
-        textShadowRadius: 4,
+        textShadow: '0 3px 4px #4F4F4F', // warna bayangan
     },
     ellipse: {
         width: 22,
