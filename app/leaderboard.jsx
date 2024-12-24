@@ -154,12 +154,12 @@ export default function Leaderboard() {
                     renderItem={({ item, index }) => (
                         <View style={styles.listItem}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 16, color: '#ffffff', marginLeft: 5 }}>{index + 4}.</Text>
+                                <Text style={{ fontSize: 15, color: '#ffffff', marginLeft: 5, fontFamily: 'PlusJakartaSans-Regular' }}>{index + 4}.</Text>
                                 <Image source={{ uri: item.image }} style={styles.listImage} />
                                 <Text style={styles.nameText}>{item.name}</Text>
                             </View>
                             <View>
-                                <Text style={{ fontSize: 20, color: '#FEBB24', marginRight: 5, fontFamily: 'PlusJakartaSans-Regular' }}>{item.points} pts</Text>
+                                <Text style={{ fontSize: 16, color: '#FEBB24', marginRight: 5, fontFamily: 'PlusJakartaSans-Regular' }}>{item.points} pts</Text>
                             </View>
                         </View>
 
@@ -180,12 +180,13 @@ const styles = StyleSheet.create({
     arrow: {
         alignSelf: 'flex-end',
         marginRight: 20,
-        marginVertical: 20,
+        marginBottom: 20,
+        marginTop: 50
     },
     leaderboardtext: {
         alignSelf: 'center',
         marginBottom: 60,
-        fontSize: 30,
+        fontSize: 25,
         color: '#FEBB24',
         fontFamily: 'BlackHanSans',
     },
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
     },
     topText: {
         top: -10,
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: "bold",
         color: "white",
     },
@@ -225,17 +226,18 @@ const styles = StyleSheet.create({
         borderRadius: 9999, // Full circle
         borderWidth: 3,
         borderColor: '#FEBB24',
-        width: 90,
-        height: 90,
+        width: 70,
+        height: 70,
         alignItems: 'center',
     },
     flatlistContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'black',
-        paddingTop: 40,
+        paddingTop: 20,
         paddingBottom: 30,
-        borderRadius: 40
+        borderTopLeftRadius: 30,
+        borderTopRightRadius:30
     },
     listImage: {
         borderRadius: 9999, // Full circle
@@ -244,11 +246,11 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         alignItems: 'center',
-        marginLeft: 3
+        marginLeft: 10
     },
     listItem: {
         flexDirection: 'row',
-        width: 378,
+        width: 320,
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
@@ -262,7 +264,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     nameText: {
-        fontSize: 16,
+        fontSize: 12,
         color: "#ffffff",
         marginLeft: 15,
         fontWeight: 'bold'
