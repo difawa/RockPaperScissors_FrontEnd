@@ -46,45 +46,38 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Image source={require("../assets/images/logo.png")} />
 
-      <InputBox
-        text="Email"
-        keyboardType="email-address"
-        form={form}
-        setForm={setForm}
-        LowerCase={true}
-      />
-      <InputBox
-        text="Password"
-        secureTextEntry={hidepassword}
-        password={true}
-        setPasswordVisible={setHidePassword}
-        PasswordVisible={hidepassword}
-        form={form}
-        setForm={setForm}
-      />
+      <View style={{ width: '100%', paddingHorizontal: 20 }}>
 
-      <Text style={{ color: "#fff", alignSelf: "flex-start" }}>
-        Don't have an account?{" "}
-        <Link href={"/register"}>
-          <Text style={{ color: "#FEBB24", fontWeight: "bold" }}>
-            Register here
-          </Text>
-        </Link>
-      </Text>
+        <InputBox
+          text="Email"
+          keyboardType="email-address"
+          form={form}
+          setForm={setForm}
+          LowerCase={true}
+        />
+        <InputBox
+          text="Password"
+          secureTextEntry={hidepassword}
+          password={true}
+          setPasswordVisible={setHidePassword}
+          PasswordVisible={hidepassword}
+          form={form}
+          setForm={setForm}
+        />
+
+        <Text style={{ color: "#fff", alignSelf: "flex-start" }}>
+          Don't have an account?{" "}
+          <Link href={"/register"}>
+            <Text style={{ color: "#FEBB24", fontWeight: "bold" }}>
+              Register here
+            </Text>
+          </Link>
+        </Text>
+      </View>
       <SubmitButton text="Sign In" onPress={handleSignIn} />
-    </View>
+    </>
   );
 }
-
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#1A1C22",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-};

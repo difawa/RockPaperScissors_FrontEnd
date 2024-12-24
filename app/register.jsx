@@ -1,5 +1,5 @@
 import { Link, useRouter } from "expo-router";
-import { StyleSheet, Text,  View, Image, Alert} from "react-native";
+import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { useState } from "react";
@@ -61,50 +61,46 @@ export default function Register() {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Image source={require("../assets/images/logo.png")} />
 
-      <InputBox
-        text="Username"
-        form={form}
-        setForm={setForm}
-        LowerCase={true}
-      />
-      <InputBox
-        text="Email"
-        keyboardType="email-address"
-        form={form}
-        setForm={setForm}
-        LowerCase={true}
-      />
-      <InputBox
-        text="Password"
-        secureTextEntry={hidepassword}
-        password={true}
-        setPasswordVisible={setHidePassword}
-        PasswordVisible={hidepassword}
-        form={form}
-        setForm={setForm}
-      />
-      <Text style={{ color: "#fff", alignSelf: "flex-start" }}>
-        Already have an account?{" "}
-        <Link href={"/"}>
-          <Text style={{ color: "#FEBB24", fontWeight: "bold" }}>
-            Login here
-          </Text>
-        </Link>
-      </Text>
+      <View style={{ width: "100%", paddingHorizontal: 20 }}>
+
+        <InputBox
+          text="Username"
+          form={form}
+          setForm={setForm}
+          LowerCase={true}
+        />
+        <InputBox
+          text="Email"
+          keyboardType="email-address"
+          form={form}
+          setForm={setForm}
+          LowerCase={true}
+        />
+        <InputBox
+          text="Password"
+          secureTextEntry={hidepassword}
+          password={true}
+          setPasswordVisible={setHidePassword}
+          PasswordVisible={hidepassword}
+          form={form}
+          setForm={setForm}
+        />
+        <Text style={{ color: "#fff", alignSelf: "flex-start" }}>
+          Already have an account?{" "}
+          <Link href={"/"}>
+            <Text style={{ color: "#FEBB24", fontWeight: "bold" }}>
+              Login here
+            </Text>
+          </Link>
+        </Text >
+      </View>
       <SubmitButton text="Sign Up" onPress={handleSignUp} />
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1A1C22",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
 });
