@@ -10,7 +10,8 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     'BlackHanSans': require('../assets/fonts/BlackHanSans.ttf'),
     'BlackOpsOne' : require('../assets/fonts/BlackOpsOne.ttf'),
-    'CabinSketch-Regular' : require('../assets/fonts/CabinSketch-Regular.ttf')
+    'CabinSketch-Regular' : require('../assets/fonts/CabinSketch-Regular.ttf'),
+    'PlusJakartaSans-Regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf')
   });
 
   useEffect(() => {
