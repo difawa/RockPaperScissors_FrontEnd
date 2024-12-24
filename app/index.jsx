@@ -4,8 +4,9 @@ import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useRouter } from "expo-router";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { LOCALHOST } from '@env'
+import { LOCALHOST } from "@env";
 
 export default function App() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -22,21 +23,21 @@ export default function App() {
     }
 
     try {
-      // Kirim permintaan login ke backend menggunakan axios
-      const response = await axios.post(
-        `http://${LOCALHOST}:4000/auth/login`,
-        {
-          email: form.email,
-          password: form.password,
-        }
-      );
+      const response = await axios.post(`http://${LOCALHOST}:4000/auth/login`, {
+        email: form.email,
+        password: form.password,
+      });
 
-      // Jika login berhasil, lanjutkan ke menu utama
+      const { token, userId, username } = response.data;
+
+      // Simpan token, userId, dan username ke AsyncStorage
+      await AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem("userId", userId.toString());
+      await AsyncStorage.setItem("username", username);
+
       Alert.alert("Success", "Next, let's play the game!");
-      console.log(response.data); // Response dari server bisa disesuaikan
       router.replace("/main-menu");
     } catch (error) {
-      // Tangani error jika login gagal
       console.error(error);
       Alert.alert(
         "Login Error",
@@ -49,8 +50,7 @@ export default function App() {
     <>
       <Image source={require("../assets/images/logo.png")} />
 
-      <View style={{ width: '100%', paddingHorizontal: 20 }}>
-
+      <View style={{ width: "100%", paddingHorizontal: 20 }}>
         <InputBox
           text="Email"
           keyboardType="email-address"
