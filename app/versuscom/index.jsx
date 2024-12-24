@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import TopLogo from "../../components/TopLogo";
 import rock from '../../assets/images/rock.png';
 import paper from '../../assets/images/paper.png';
-import scissor from '../../assets/images/scissor.png';
+import scissors from '../../assets/images/scissor.png';
 import scorebg from '../../assets/images/score.png'
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -16,6 +16,7 @@ const user = {
 
 export default function MainMenu() {
     const [scores, setScores] = useState({ user: 0, com: 0 });
+    const [chooses, setChooses] = useState({ user: '', com: '' });
     const router = useRouter();
     return (
         <>
@@ -32,16 +33,17 @@ export default function MainMenu() {
             </View>
             <Text style={styles.select}>SELECT ONE :</Text>
             <View style={styles.imageContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setChooses({ ...chooses, user: 'rock' })}>
                     <Image source={rock} style={{ width: 100, resizeMode: 'contain' }} />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image source={scissor} style={{ width: 100, resizeMode: 'contain' }} />
+                <TouchableOpacity onPress={() => setChooses({ ...chooses, user: 'scissors' })}>
+                    <Image source={scissors} style={{ width: 100, resizeMode: 'contain' }} />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }}>
+            <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => setChooses({ ...chooses, user: 'paper' })} >
                 <Image source={paper} style={{ width: 100, resizeMode: 'contain' }} />
             </TouchableOpacity>
+            <Text>{JSON.stringify(chooses)}</Text>
         </>
     );
 }
