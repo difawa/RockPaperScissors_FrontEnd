@@ -15,9 +15,13 @@ const user = {
 
 
 export default function MainMenu() {
+    const options = ["rock", "scissors", "paper"];
+    const randomIndex = Math.floor(Math.random() * options.length); // Angka acak antara 0 dan 2
+    const [choices, setChoices] = useState({ user: '', com: '' });
     const [scores, setScores] = useState({ user: 0, com: 0 });
-    const [chooses, setChooses] = useState({ user: '', com: '' });
+
     const router = useRouter();
+
     return (
         <>
             <TopLogo />
@@ -28,22 +32,22 @@ export default function MainMenu() {
             </View>
             <View style={{ width: '70%' }}>
                 <Text style={styles.title}>CHOOSE</Text>
-                <Text style={{ ...styles.title, color: '#FFF', alignSelf: 'flex-end' }}>YOUR</Text>
+                <Text style={{ ...styles.title, color: '#FFF', alignSelf: 'flex-end', marginVertical: -10 }}>YOUR</Text>
                 <Text style={{ ...styles.title, alignSelf: 'center' }}>FATE</Text>
             </View>
             <Text style={styles.select}>SELECT ONE :</Text>
             <View style={styles.imageContainer}>
-                <TouchableOpacity onPress={() => setChooses({ ...chooses, user: 'rock' })}>
+                <TouchableOpacity onPress={() => { setChoices({ ...choices, user: 'rock', com: options[randomIndex] }), router.replace('/versuscom/result') }}>
                     <Image source={rock} style={{ width: 100, resizeMode: 'contain' }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setChooses({ ...chooses, user: 'scissors' })}>
+                <TouchableOpacity onPress={() => setChoices({ ...choices, user: 'scissors', com: options[randomIndex] })}>
                     <Image source={scissors} style={{ width: 100, resizeMode: 'contain' }} />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => setChooses({ ...chooses, user: 'paper' })} >
+            <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => setChoices({ ...choices, user: 'paper', com: options[randomIndex] })} >
                 <Image source={paper} style={{ width: 100, resizeMode: 'contain' }} />
             </TouchableOpacity>
-            <Text>{JSON.stringify(chooses)}</Text>
+            <Text style={{color: '#fff'}}>{JSON.stringify(choices)}</Text>
         </>
     );
 }
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '60%',
+        marginTop: -15
     },
     scores: {
         color: '#FFF',
