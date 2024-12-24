@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import TopLogo from "../components/TopLogo";
-import rock from '../assets/images/rock.png';
-import paper from '../assets/images/paper.png';
-import scissor from '../assets/images/scissor.png';
-import score from '../assets/images/score.png'
+import TopLogo from "../../components/TopLogo";
+import rock from '../../assets/images/rock.png';
+import paper from '../../assets/images/paper.png';
+import scissor from '../../assets/images/scissor.png';
+import score from '../../assets/images/score.png'
 import { useRouter } from "expo-router";
 
 const user = {
@@ -21,16 +21,10 @@ export default function MainMenu() {
             <View style={{ position: 'relative', right: 20, width: '100%', alignItems: 'flex-end' }}>
                 <Image source={score} style={{ width: 139, height: 42 }} />
             </View>
-            <View style={{ marginTop: 20, marginLeft: 75, flexDirection: 'row', alignSelf: 'flex-start' }}>
-                <Text style={styles.title}>CHOOSE</Text>
-            </View>
-            <View style={{ marginRight: 75, flexDirection: 'row', alignSelf: 'flex-end' }}>
-                <Text style={styles.title}><Text style={{ color: '#FFF' }}>YOUR</Text></Text>
-            </View>
+            <Text style={styles.title}>CHOOSE</Text>
+            <Text style={{ ...styles.title, color: '#FFF' }}>YOUR</Text>
             <Text style={styles.title}>FATE</Text>
-            <View>
-                <Text style={styles.select}>SELECT ONE :</Text>
-            </View>
+            <Text style={styles.select}>SELECT ONE :</Text>
             <View style={styles.imageContainer}>
                 <TouchableOpacity onPress={() => router.push('/RR_draw')}>
                     <Image source={rock} />
@@ -39,11 +33,9 @@ export default function MainMenu() {
                     <Image source={scissor} />
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity>
-                    <Image source={paper} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity>
+                <Image source={paper} />
+            </TouchableOpacity>
         </>
     );
 }
@@ -67,6 +59,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '80%',
+        width: '75%',
     }
 })

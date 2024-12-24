@@ -21,7 +21,7 @@ export default function Mode() {
             <TopLogo />
 
             <Text style={styles.title}>Choose <Text style={{ color: '#FFF' }}>Player :</Text></Text>
-            <TouchableOpacity onPress={() => router.push('/in-game')}>
+            <TouchableOpacity onPress={() => router.push('/versuscom')}>
                 <Image source={vscom} style={styles.vs} />
             </TouchableOpacity>
             <Text style={styles.or}>O<Text style={{ color: '#FFF' }}>R</Text></Text>
