@@ -24,6 +24,7 @@ export default function MainMenu() {
             <MenuButton text="LEADERBOARD" onPress={() => router.push('/leaderboard')} color='#FEBB24' color2="#D7E773" />
             <MenuButton text="EXIT" onPress={() => router.replace('/')} color='#F80000' color2="#E87575" />
 
+
             <Svg width="100%" height="144" preserveAspectRatio="none" viewBox="0 0 393 144" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginTop: -10 }}>
                 <Path d="M393 129.764L8.22544e-06 0V39.4221L393 144L393 129.764Z" fill="#D7E773" />
             </Svg>
