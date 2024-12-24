@@ -8,6 +8,12 @@ import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import lightning from '../../assets/images/lightning.png'
 import { Alert } from "react-native";
+import userPaper from '../../assets/images/userpaper.png'
+import userRock from '../../assets/images/userrock.png'
+import userScissors from '../../assets/images/userscissors.png'
+import comPaper from '../../assets/images/compaper.png'
+import comRock from '../../assets/images/comrock.png'
+import comScissors from '../../assets/images/comscissors.png'
 
 const user = {
     id: 1,
@@ -58,65 +64,73 @@ export default function MainMenu() {
         }
     }
 
-        return (
-            <>
-                <Svg width="100%" height="100" preserveAspectRatio="none"
-                    viewBox="0 0 393 137" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <Path d="M0 123.456L393 0V37.5057L0 137L0 123.456Z" fill="#D7E773" />
-                </Svg>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={lightning} style={{ width: 393, height: 420, opacity: 0.35 }} />
-                    <View style={{ position: 'absolute' }}>
-                        <Text style={{ fontSize: 40, fontFamily: 'BlackOpsOne', color: '#FFF', textShadow: '-1px 1px 10px black' }} >{result}</Text>
-                    </View>
+    return (
+        <>
+            <Svg width="100%" height="100" preserveAspectRatio="none"
+                viewBox="0 0 393 137" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <Path d="M0 123.456L393 0V37.5057L0 137L0 123.456Z" fill="#D7E773" />
+            </Svg>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={lightning} style={{ width: 393, height: 420, opacity: 0.35 }} />
+                <View style={{ position: 'absolute', alignItems: 'center' }}>
+                    {choices.com === 'paper' && <Image source={comPaper} style={{ width: 100 }} />}
+                    {choices.com === 'rock' && <Image source={comRock} style={{ width: 100 }} />}
+                    {choices.com === 'scissors' && <Image source={comScissors} style={{ width: 100 }} />}
+                    <Text style={styles.textResult} >{result}</Text>
+                    {choices.user === 'paper' && <Image source={userPaper} style={{ width: 100 }} />}
+                    {choices.user === 'rock' && <Image source={userRock} style={{ width: 100 }} />}
+                    {choices.user === 'scissors' && <Image source={userScissors} style={{ width: 100 }} />}
                 </View>
-                <View style={{ marginTop: -5, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={scorebg} style={{ width: 139, height: 42 }} />
-                    <Text style={styles.scores}>{scores.user} : {scores.com}</Text>
-                </View>
+            </View>
+            <View style={styles.scoreContainer}>
+                <Image source={scorebg} style={{ width: 139, height: 42 }} />
+                <Text style={styles.textScores}>{scores.user} : {scores.com}</Text>
+            </View>
 
-                <Text style={styles.select}>SELECT ONE :</Text>
-                <View style={styles.imageContainer}>
-                    <TouchableOpacity onPress={() => handleChoice('rock')}>
-                        <Image source={rock} resizeMode="contain" style={{ width: 100 }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleChoice('scissors')}>
-                        <Image source={scissors} resizeMode="contain" style={{ width: 100 }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => handleChoice('paper')} >
-                        <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
-                    </TouchableOpacity>
-                </View>
-            </>
-        );
-    }
+            <Text style={styles.select}>SELECT ONE :</Text>
+            <View style={styles.imageContainer}>
+                <TouchableOpacity onPress={() => handleChoice('rock')}>
+                    <Image source={rock} resizeMode="contain" style={{ width: 100 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleChoice('scissors')}>
+                    <Image source={scissors} resizeMode="contain" style={{ width: 100 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => handleChoice('paper')} >
+                    <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
+                </TouchableOpacity>
+            </View>
+        </>
+    );
+}
 
-    const styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
 
-        title: {
-            fontSize: 50,
-            color: '#FEBB24',
-            fontFamily: 'BlackOpsOne',
-        },
-        select: {
-            fontSize: 20,
-            color: '#D7E773',
-            fontFamily: 'BlackHanSans',
-            marginTop: 20
-        },
-        imageContainer: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '80%'
-        },
-        scores: {
-            color: '#FFF',
-            fontFamily: 'BlackOpsOne',
-            position: 'absolute',
-            fontSize: 20,
-            textShadow: '-1px 1px 10px black',
-        }
-    })
+    title: {
+        fontSize: 50,
+        color: '#FEBB24',
+        fontFamily: 'BlackOpsOne',
+    },
+    select: {
+        fontSize: 20,
+        color: '#D7E773',
+        fontFamily: 'BlackHanSans',
+        marginTop: 20
+    },
+    imageContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '80%'
+    },
+    scoreContainer: { marginTop: -5, alignItems: 'center', justifyContent: 'center' },
+    textScores: {
+        color: '#FFF',
+        fontFamily: 'BlackOpsOne',
+        position: 'absolute',
+        fontSize: 20,
+        textShadow: '-1px 1px 10px black',
+    },
+    textResult: { fontSize: 40, fontFamily: 'BlackOpsOne', color: '#FFF', textShadow: '-1px 1px 10px black' }
+})
