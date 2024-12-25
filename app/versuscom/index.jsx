@@ -62,6 +62,9 @@ export default function VersusCom() {
       rock: require('../../assets/audio/rock.mp3'),
       paper: require('../../assets/audio/paper.mp3'),
       scissors: require('../../assets/audio/scissors.mp3'),
+      win: require('../../assets/audio/win.mp3'),
+      lose: require('../../assets/audio/lose.mp3'),
+      draw: require('../../assets/audio/draw.mp3'),
     };
 
     const loadedAudios = {};
@@ -160,7 +163,8 @@ export default function VersusCom() {
 
       console.log("Response from server:", response.data); // Debugging
       setFinalGame(response.data.match.winner);
-      setTimeout(() => setVisiblePopOut(true), 1000);
+      response.data.match.winner === 'user1' ? playAudio('win') : response.data.match.winner === 'user2' ? playAudio('lose') : playAudio('draw');
+      setTimeout(() => {setVisiblePopOut(true)}, 1000);
     } catch (error) {
       if (error.response) {
         // Response dari server ada tapi dengan status error
