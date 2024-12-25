@@ -21,11 +21,16 @@ export default function Mode() {
             <TopLogo />
 
             <Text style={styles.title}>Choose <Text style={{ color: '#FFF' }}>Player :</Text></Text>
+            
             <TouchableOpacity onPress={() => router.push('/versuscom')}>
                 <Image source={vscom} style={styles.vs} />
             </TouchableOpacity>
+            
             <Text style={styles.or}>O<Text style={{ color: '#FFF' }}>R</Text></Text>
-            <Image source={vsuser} style={styles.vs} />
+            
+            <TouchableOpacity onPress={() => router.push('/versushuman')}>
+                <Image source={vsuser} style={styles.vs} />
+            </TouchableOpacity>
 
             <Svg width="100%" height="144" viewBox="0 0 393 144" fill="none" preserveAspectRatio="none">
                 <Path d="M393 129.764L8.22544e-06 0V39.4221L393 144L393 129.764Z" fill="#D7E773" />
@@ -46,12 +51,12 @@ const styles = StyleSheet.create({
         fontSize: 35,
         color: '#FEBB24',
         fontFamily: 'BlackOpsOne',
-        marginTop: 30
+        marginTop: 15
     },
     or: {
         color: '#FEBB24',
         fontSize: 30,
         fontFamily: 'CabinSketch-Regular',
     },
-    vs: { width: 236, height: 93, marginVertical: 20 }
+    vs: { width: 236, height: 93, marginTop: 20, marginBottom: 15 }
 })

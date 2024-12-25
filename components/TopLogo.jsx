@@ -5,7 +5,7 @@ import { Image } from "react-native"
 export default function TopLogo() {
     return (
         <>
-            <Image source={LogoNinja} style={{ width: 210, height: 220, marginBottom: -75 }} />
+            <Image source={LogoNinja} style={{ width: 190, height: 200, marginBottom: -80 }} />
             <Svg width="100%" height="100" preserveAspectRatio="none"
                 viewBox="0 0 393 137" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
