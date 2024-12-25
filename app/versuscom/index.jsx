@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import rock from "../../assets/images/rock.png";
@@ -52,23 +51,54 @@ export default function VersusCom() {
   const [scores, setScores] = useState({ user: 0, com: 0 });
   const [result, setResult] = useState("");
   const [rounds, setRounds] = useState([]);
-  const router = useRouter();
   const [visiblePopOut, setVisiblePopOut] = useState(false);
   const [finalGame, setFinalGame] = useState("");
 
-  const [sound, setSound] = useState();
-  
-  useEffect(() => {
-    const playAudio = async () => {
-      const { sound } = await Audio.Sound.createAsync(
-        require('../../assets/audio/HandofFate.mp3')
-      );
-      setSound(sound);
-      await sound.playAsync();
+  const [audioFiles, setAudioFiles] = useState({});
+
+  const preloadAudios = async () => {
+    const audioPaths = {
+      handOfFate: require('../../assets/audio/HandofFate.mp3'),
+      rock: require('../../assets/audio/rock.mp3'),
+      paper: require('../../assets/audio/paper.mp3'),
+      scissors: require('../../assets/audio/scissors.mp3'),
     };
-    
-    playAudio();
-  }, [])
+
+    const loadedAudios = {};
+    for (const [key, path] of Object.entries(audioPaths)) {
+      const { sound } = await Audio.Sound.createAsync(path);
+      loadedAudios[key] = sound;
+    }
+
+    setAudioFiles(loadedAudios);
+  };
+
+  useEffect(() => {
+    if (audioFiles.handOfFate){
+      playAudio("handOfFate");
+    }
+  }, [audioFiles]);
+
+  const playAudio = async (key) => {
+    if (audioFiles[key]) {
+      await audioFiles[key].replayAsync(); // Memutar audio dari awal
+    }
+    else {console.log('audio not found')}
+  };
+
+  useEffect(() => {
+    preloadAudios();
+
+    return () => {
+      // Cleanup semua audio saat komponen di-unmount
+      Object.values(audioFiles).forEach((sound) => {
+        if (sound) {
+          sound.unloadAsync();
+        }
+      });
+    };
+
+  }, []);
 
   useEffect(() => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
@@ -81,6 +111,7 @@ export default function VersusCom() {
       // Alert.alert("Game Over", "The match has already ended.");
       return;
     }
+    playAudio(userChoice);
 
     const comChoice = comGenerator();
     const gameResult = compareChoices(userChoice, comChoice);
