@@ -14,10 +14,10 @@ export default function InputBox(props) {
     };
     return (
         <>
-            <Text style={{ color: '#fff', alignSelf: 'flex-start', paddingLeft: 20 }}>{props.text}<Text style={{ color: 'red' }}>*</Text></Text>
+            <Text style={styles.inputTitle}>{props.text}<Text style={{ color: 'red' }}>*</Text></Text>
             <View style={{ width: '100%' }}>
                 <TextInput placeholder={props.text}
-                    style={styles.input}
+                    style={styles.inputFill}
                     keyboardType={props.keyboardType}
                     secureTextEntry={props.secureTextEntry}
                     autoCapitalize="none"
@@ -40,7 +40,8 @@ export default function InputBox(props) {
 }
 
 const styles = StyleSheet.create({
-    input: {
+    inputTitle: { color: '#fff', alignSelf: 'flex-start', paddingLeft: 20 },
+    inputFill: {
         width: '100%',
         height: 50,
         backgroundColor: '#7C5F1E',
