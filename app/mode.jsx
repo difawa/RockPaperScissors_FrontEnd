@@ -48,22 +48,22 @@ export default function Mode() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1A1C22",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 35,
-    color: "#FEBB24",
-    fontFamily: "BlackOpsOne",
-    marginTop: 30,
-  },
-  or: {
-    color: "#FEBB24",
-    fontSize: 30,
-    fontFamily: "CabinSketch-Regular",
-  },
-  vs: { width: 236, height: 93, marginVertical: 20 },
-});
+    container: {
+        flex: 1,
+        backgroundColor: '#1A1C22',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 35,
+        color: '#FEBB24',
+        fontFamily: 'BlackOpsOne',
+        marginTop: 15
+    },
+    or: {
+        color: '#FEBB24',
+        fontSize: 30,
+        fontFamily: 'CabinSketch-Regular',
+    },
+    vs: { width: 236, height: 93, marginTop: 20, marginBottom: 15 }
+})

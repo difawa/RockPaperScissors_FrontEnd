@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import rock from "../../assets/images/rock.png";
@@ -23,6 +22,8 @@ import Score from "../../components/Score";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOCALHOST } from "@env";
+import EndGamePopOut from "../../components/EndGamePopOut";
+import { Audio } from 'expo-av';
 
 const options = ["rock", "scissors", "paper"];
 
@@ -43,12 +44,64 @@ const compareChoices = (user, com) => {
   return "You Lose";
 };
 
+
+
 export default function VersusCom() {
   const [choices, setChoices] = useState({ user: "", com: "" });
   const [scores, setScores] = useState({ user: 0, com: 0 });
   const [result, setResult] = useState("");
   const [rounds, setRounds] = useState([]);
-  const router = useRouter();
+  const [visiblePopOut, setVisiblePopOut] = useState(false);
+  const [finalGame, setFinalGame] = useState("");
+
+  const [audioFiles, setAudioFiles] = useState({});
+
+  const preloadAudios = async () => {
+    const audioPaths = {
+      handOfFate: require('../../assets/audio/HandofFate.mp3'),
+      rock: require('../../assets/audio/rock.mp3'),
+      paper: require('../../assets/audio/paper.mp3'),
+      scissors: require('../../assets/audio/scissors.mp3'),
+      win: require('../../assets/audio/win.mp3'),
+      lose: require('../../assets/audio/lose.mp3'),
+      draw: require('../../assets/audio/draw.mp3'),
+    };
+
+    const loadedAudios = {};
+    for (const [key, path] of Object.entries(audioPaths)) {
+      const { sound } = await Audio.Sound.createAsync(path);
+      loadedAudios[key] = sound;
+    }
+
+    setAudioFiles(loadedAudios);
+  };
+
+  useEffect(() => {
+    if (audioFiles.handOfFate) {
+      playAudio("handOfFate");
+    }
+  }, [audioFiles]);
+
+  const playAudio = async (key) => {
+    if (audioFiles[key]) {
+      await audioFiles[key].replayAsync(); // Memutar audio dari awal
+    }
+    else { console.log('audio not found') }
+  };
+
+  useEffect(() => {
+    preloadAudios();
+
+    return () => {
+      // Cleanup semua audio saat komponen di-unmount
+      Object.values(audioFiles).forEach((sound) => {
+        if (sound) {
+          sound.unloadAsync();
+        }
+      });
+    };
+
+  }, []);
 
   useEffect(() => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
@@ -58,9 +111,10 @@ export default function VersusCom() {
 
   const handleChoice = (userChoice) => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
-      Alert.alert("Game Over", "The match has already ended.");
+      // Alert.alert("Game Over", "The match has already ended.");
       return;
     }
+    playAudio(userChoice);
 
     const comChoice = comGenerator();
     const gameResult = compareChoices(userChoice, comChoice);
@@ -74,8 +128,8 @@ export default function VersusCom() {
           gameResult === "You Win"
             ? "user1"
             : gameResult === "You Lose"
-            ? "user2"
-            : "draw",
+              ? "user2"
+              : "draw",
       },
     ]);
 
@@ -108,8 +162,9 @@ export default function VersusCom() {
       );
 
       console.log("Response from server:", response.data); // Debugging
-      Alert.alert("Game Over", response.data.message);
-      router.push("/mode");
+      setFinalGame(response.data.match.winner);
+      function lastAudio() { response.data.match.winner === 'user1' ? playAudio('win') : response.data.match.winner === 'user2' ? playAudio('lose') : playAudio('draw') };
+      setTimeout(() => { setVisiblePopOut(true), lastAudio() }, 1000);
     } catch (error) {
       if (error.response) {
         // Response dari server ada tapi dengan status error
@@ -194,6 +249,7 @@ export default function VersusCom() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
+      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} finalGame={finalGame} />
     </>
   );
 }

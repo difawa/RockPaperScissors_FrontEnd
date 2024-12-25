@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Text, View, Image, Alert } from "react-native";
-import InputBox from "../components/InputBox";
-import SubmitButton from "../components/SubmitButton";
 import { Link, useRouter } from "expo-router";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { LOCALHOST } from "@env";
+
+import InputBox from "../components/InputBox";
+import SubmitButton from "../components/SubmitButton";
 
 export default function App() {
   const [form, setForm] = useState({ email: "", password: "" });
