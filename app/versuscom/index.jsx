@@ -51,6 +51,7 @@ export default function VersusCom() {
   const [rounds, setRounds] = useState([]);
   const router = useRouter();
   const [visiblePopOut, setVisiblePopOut] = useState(false);
+  const [finalGame, setFinalGame] = useState("");
 
   useEffect(() => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
@@ -60,7 +61,7 @@ export default function VersusCom() {
 
   const handleChoice = (userChoice) => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
-      Alert.alert("Game Over", "The match has already ended.");
+      // Alert.alert("Game Over", "The match has already ended.");
       return;
     }
 
@@ -110,7 +111,8 @@ export default function VersusCom() {
       );
 
       console.log("Response from server:", response.data); // Debugging
-      setVisiblePopOut(true);
+      setFinalGame(response.data.match.winner);
+      setTimeout(() => setVisiblePopOut(true), 1000);
     } catch (error) {
       if (error.response) {
         // Response dari server ada tapi dengan status error
@@ -195,7 +197,7 @@ export default function VersusCom() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
-      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} />
+      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} finalGame={finalGame} />
     </>
   );
 }
