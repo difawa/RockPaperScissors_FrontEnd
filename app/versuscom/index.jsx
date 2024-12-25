@@ -77,7 +77,7 @@ export default function VersusCom() {
   };
 
   useEffect(() => {
-    if (audioFiles.handOfFate){
+    if (audioFiles.handOfFate) {
       playAudio("handOfFate");
     }
   }, [audioFiles]);
@@ -86,7 +86,7 @@ export default function VersusCom() {
     if (audioFiles[key]) {
       await audioFiles[key].replayAsync(); // Memutar audio dari awal
     }
-    else {console.log('audio not found')}
+    else { console.log('audio not found') }
   };
 
   useEffect(() => {
@@ -163,8 +163,8 @@ export default function VersusCom() {
 
       console.log("Response from server:", response.data); // Debugging
       setFinalGame(response.data.match.winner);
-      response.data.match.winner === 'user1' ? playAudio('win') : response.data.match.winner === 'user2' ? playAudio('lose') : playAudio('draw');
-      setTimeout(() => {setVisiblePopOut(true)}, 1000);
+      function lastAudio() { response.data.match.winner === 'user1' ? playAudio('win') : response.data.match.winner === 'user2' ? playAudio('lose') : playAudio('draw') };
+      setTimeout(() => { setVisiblePopOut(true), lastAudio() }, 1000);
     } catch (error) {
       if (error.response) {
         // Response dari server ada tapi dengan status error
