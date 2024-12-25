@@ -24,6 +24,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOCALHOST } from "@env";
 import EndGamePopOut from "../../components/EndGamePopOut";
+import { Audio } from 'expo-av';
 
 const options = ["rock", "scissors", "paper"];
 
@@ -44,6 +45,8 @@ const compareChoices = (user, com) => {
   return "You Lose";
 };
 
+
+
 export default function VersusCom() {
   const [choices, setChoices] = useState({ user: "", com: "" });
   const [scores, setScores] = useState({ user: 0, com: 0 });
@@ -52,6 +55,20 @@ export default function VersusCom() {
   const router = useRouter();
   const [visiblePopOut, setVisiblePopOut] = useState(false);
   const [finalGame, setFinalGame] = useState("");
+
+  const [sound, setSound] = useState();
+  
+  useEffect(() => {
+    const playAudio = async () => {
+      const { sound } = await Audio.Sound.createAsync(
+        require('../../assets/audio/HandofFate.mp3')
+      );
+      setSound(sound);
+      await sound.playAsync();
+    };
+    
+    playAudio();
+  }, [])
 
   useEffect(() => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
