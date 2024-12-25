@@ -23,6 +23,7 @@ import Score from "../../components/Score";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOCALHOST } from "@env";
+import EndGamePopOut from "../../components/EndGamePopOut";
 
 const options = ["rock", "scissors", "paper"];
 
@@ -49,6 +50,7 @@ export default function VersusCom() {
   const [result, setResult] = useState("");
   const [rounds, setRounds] = useState([]);
   const router = useRouter();
+  const [visiblePopOut, setVisiblePopOut] = useState(false);
 
   useEffect(() => {
     if (scores.user === 3 || scores.com === 3 || rounds.length === 5) {
@@ -74,8 +76,8 @@ export default function VersusCom() {
           gameResult === "You Win"
             ? "user1"
             : gameResult === "You Lose"
-            ? "user2"
-            : "draw",
+              ? "user2"
+              : "draw",
       },
     ]);
 
@@ -108,8 +110,7 @@ export default function VersusCom() {
       );
 
       console.log("Response from server:", response.data); // Debugging
-      Alert.alert("Game Over", response.data.message);
-      router.push("/mode");
+      setVisiblePopOut(true);
     } catch (error) {
       if (error.response) {
         // Response dari server ada tapi dengan status error
@@ -194,6 +195,7 @@ export default function VersusCom() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
+      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} />
     </>
   );
 }
