@@ -13,7 +13,7 @@ export default function InputBox(props) {
         }
     };
     return (
-        <>
+        <View>
             <Text style={{ color: '#fff', alignSelf: 'flex-start', paddingLeft: 20 }}>{props.text}<Text style={{ color: 'red' }}>*</Text></Text>
             <View style={{ width: '100%' }}>
                 <TextInput placeholder={props.text}
@@ -35,7 +35,7 @@ export default function InputBox(props) {
                         />
                     </TouchableOpacity>}
             </View>
-        </>
+        </View>
     )
 }
 

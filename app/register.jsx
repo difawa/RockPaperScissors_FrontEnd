@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { useState } from "react";
-import axios from "axios";
-import { LOCALHOST } from "@env";
+import api from "../api/api";
 
 export default function Register() {
   const [hidepassword, setHidePassword] = useState(true);
@@ -33,14 +32,20 @@ export default function Register() {
 
     try {
       // Kirim data ke API
-      const response = await axios.post(
-        `http://${LOCALHOST}:4000/auth/register`,
-        {
-          username: form.username,
-          email: form.email,
-          password: form.password,
-        }
-      );
+      // const response = await axios.post(
+      //   `http://${LOCALHOST}:4000/auth/register`,
+      //   {
+      //     username: form.username,
+      //     email: form.email,
+      //     password: form.password,
+      //   }
+      // );
+
+      const response = await api.post('/auth/register', {
+        username: form.username,
+        email: form.email,
+        password: form.password
+      })
 
       if (response.status === 201) {
         // Jika registrasi berhasil

@@ -47,7 +47,7 @@ export default function MainMenu() {
             <TouchableOpacity style={{ marginTop: -80, marginBottom: -80 }} onPress={() => setChoices({ ...choices, user: 'paper', com: options[randomIndex] })} >
                 <Image source={paper} style={{ width: 100, resizeMode: 'contain' }} />
             </TouchableOpacity>
-            <Text style={{color: '#fff'}}>{JSON.stringify(choices)}</Text>
+            <Text style={{ color: '#fff' }}>{JSON.stringify(choices)}</Text>
         </>
     );
 }

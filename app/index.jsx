@@ -3,9 +3,9 @@ import { Text, View, Image, Alert } from "react-native";
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useRouter } from "expo-router";
-import axios from "axios";
 
 import { LOCALHOST } from '@env'
+import api from "../api/api";
 
 export default function App() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -23,13 +23,20 @@ export default function App() {
 
     try {
       // Kirim permintaan login ke backend menggunakan axios
-      const response = await axios.post(
-        `http://${LOCALHOST}:4000/auth/login`,
-        {
-          email: form.email,
-          password: form.password,
-        }
-      );
+      // const response = await api.post(
+      //   `http://${LOCALHOST}:4000/auth/login`,
+      //   {
+      //     email: form.email,
+      //     password: form.password,
+      //   }
+      // );
+
+      const response = await api.post('/auth/login', {
+        email: form.email,
+        password: form.password
+      })
+
+
 
       // Jika login berhasil, lanjutkan ke menu utama
       Alert.alert("Success", "Next, let's play the game!");
