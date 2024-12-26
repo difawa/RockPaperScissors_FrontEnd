@@ -200,7 +200,7 @@ export default function Leaderboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1A1C22",
+    width: '100%'
   },
   arrow: {
     alignSelf: "flex-end",
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   },
   topText: {
     top: -10,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "bold",
     color: "white",
   },
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   nameText: {
-    fontSize: 12,
+    fontSize: 13,
     color: "#ffffff",
     marginLeft: 15,
     fontWeight: "bold",
