@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: 32,
         fontFamily: 'BlackOpsOne',
     },
     playAgain: {
@@ -72,7 +72,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'BlackHanSans',
         textAlign: 'center',
-        textShadow: '0px 0px 5px black',
+        textShadowColor: '#000',
+        textShadowOffset: { width:1, height: 1 },
+        textShadowRadius: 7
     },
     toLeaderboardButton: {
         marginTop: 10,

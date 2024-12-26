@@ -35,7 +35,6 @@ export default function App() {
       await AsyncStorage.setItem("userId", userId.toString());
       await AsyncStorage.setItem("username", username);
 
-      Alert.alert("Success", "Next, let's play the game!");
       router.replace("/main-menu");
     } catch (error) {
       console.error(error);
