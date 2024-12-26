@@ -107,9 +107,11 @@ export default function Leaderboard() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.arrow}>
       <TouchableOpacity onPress={() => router.push("/main-menu")}>
-        <Image source={Arrow} style={styles.arrow} />
+        <Image source={Arrow} />
       </TouchableOpacity>
+      </View>
 
       <Text style={styles.leaderboardtext}>LEADERBOARD</Text>
       {/* top 3 */}
