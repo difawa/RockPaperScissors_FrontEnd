@@ -9,9 +9,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@charmy.tech/react-native-stroke-text": "^1.2.2",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "axios": "^1.7.9",
     "expo": "~52.0.20",
+    "expo-av": "~15.0.1",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.2",
     "expo-linear-gradient": "~14.0.1",
@@ -28,8 +30,7 @@
     "react-native-svg": "^15.10.1",
     "react-native-svg-transformer": "^1.5.0",
     "react-native-web": "~0.19.13",
-    "socket.io-client": "^4.8.1",
-    "expo-av": "~15.0.1"
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
