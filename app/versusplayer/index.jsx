@@ -21,7 +21,7 @@ import comPaper from "../../assets/images/compaper.png";
 import comRock from "../../assets/images/comrock.png";
 import comScissors from "../../assets/images/comscissors.png";
 import Score from "../../components/Score";
-import { LOCALHOST } from "@env";
+import { BASE_URL } from "@env";
 
 export default function VersusPlayer() {
   const [choices, setChoices] = useState({ user: "", opponent: "" });
@@ -48,7 +48,7 @@ export default function VersusPlayer() {
     fetchUserId();
 
     // Inisialisasi koneksi socket
-    const newSocket = io(`http://${LOCALHOST}:4000`, {
+    const newSocket = io(`${BASE_URL}`, {
       transports: ["websocket"],
     });
     setSocket(newSocket);

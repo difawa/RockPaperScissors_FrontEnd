@@ -21,7 +21,7 @@ import comScissors from "../../assets/images/comscissors.png";
 import Score from "../../components/Score";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LOCALHOST } from "@env";
+import { BASE_URL } from "@env";
 import EndGamePopOut from "../../components/EndGamePopOut";
 import { Audio } from 'expo-av';
 
@@ -148,7 +148,7 @@ export default function VersusCom() {
         throw new Error("Missing user authentication details.");
 
       const response = await axios.post(
-        `http://${LOCALHOST}:4000/matches/record`,
+        `${BASE_URL}/matches/record`,
         {
           user1Id: userId,
           user2Id: "computer",

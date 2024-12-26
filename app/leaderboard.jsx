@@ -17,7 +17,7 @@ import { useRouter } from "expo-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LOCALHOST } from "@env";
+import { BASE_URL } from "@env";
 
 export default function Leaderboard() {
   const [users, setUsers] = useState([]);
@@ -45,7 +45,7 @@ export default function Leaderboard() {
 
       try {
         const response = await axios.get(
-          `http://${LOCALHOST}:4000/matches/leaderboard`,
+          `${BASE_URL}/matches/leaderboard`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
