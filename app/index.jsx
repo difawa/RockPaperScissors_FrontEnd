@@ -3,7 +3,7 @@ import { Text, View, Image, Alert } from "react-native";
 import { Link, useRouter } from "expo-router";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LOCALHOST } from "@env";
+import { BASE_URL } from "@env";
 
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
@@ -23,7 +23,7 @@ export default function App() {
     }
 
     try {
-      const response = await axios.post(`http://${LOCALHOST}:4000/auth/login`, {
+      const response = await axios.post(`${BASE_URL}/auth/login`, {
         email: form.email,
         password: form.password,
       });
