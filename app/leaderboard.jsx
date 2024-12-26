@@ -156,7 +156,7 @@ export default function Leaderboard() {
 
       <View style={styles.flatlistContainer}>
         <FlatList
-          style={{ height: 450 }}
+          style={{ height: 300 }} 
           data={others}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
