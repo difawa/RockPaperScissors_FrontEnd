@@ -23,7 +23,7 @@ import comScissors from "../../assets/images/comscissors.png";
 import Score from "../../components/ScoreUser";
 import { BASE_URL } from "@env";
 import { Audio } from "expo-av";
-import EndGamePopOut from "../../components/EndGamePopOut";
+import EndGamePopOutUser from "../../components/EndGamePopOutUser";
 
 export default function VersusPlayer() {
   const [choices, setChoices] = useState({ user: "", opponent: "" });
@@ -261,7 +261,7 @@ export default function VersusPlayer() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
-      <EndGamePopOut
+      <EndGamePopOutUser
         visible={visiblePopOut}
         setVisible={setVisiblePopOut}
         finalGame={finalGame}
