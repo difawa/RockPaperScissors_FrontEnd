@@ -7,11 +7,16 @@ import { BASE_URL } from "@env";
 
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
+import ErrorPopOut from "../components/ErrorPopOut";
 
 export default function App() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [hidepassword, setHidePassword] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [errorStatus, setErrorStatus] = useState();
+
   const router = useRouter();
+
 
   const handleSignIn = async () => {
     if (!form.email || !form.password) {
@@ -38,10 +43,15 @@ export default function App() {
       router.replace("/main-menu");
     } catch (error) {
       console.error(error);
-      Alert.alert(
-        "Login Error",
-        error.response?.data?.message || "An error occurred during login."
-      );
+      setErrorStatus(error.status)
+      if ([401, 404].includes(error.status)) {
+        setVisible(true);
+      } else {
+        Alert.alert(
+          "Login Error",
+          error.response?.data?.message || "An error occurred during login."
+        );
+      }
     }
   };
 
@@ -77,6 +87,7 @@ export default function App() {
         </Text>
       </View>
       <SubmitButton text="Sign In" onPress={handleSignIn} />
+      <ErrorPopOut visible={visible} setVisible={setVisible} errorStatus={errorStatus} />
     </>
   );
 }
