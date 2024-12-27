@@ -1,15 +1,19 @@
 import { Link, useRouter } from "expo-router";
 import { StyleSheet, Text, View, Image, Alert } from "react-native";
-import InputBox from "../components/InputBox";
-import SubmitButton from "../components/SubmitButton";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "@env";
+
+import InputBox from "../components/InputBox";
+import SubmitButton from "../components/SubmitButton";
+import ErrorPopOut from "../components/ErrorPopOut";
 
 export default function Register() {
   const [hidepassword, setHidePassword] = useState(true);
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const router = useRouter();
+  const [errorStatus, setErrorStatus] = useState();
+  const [visible, setVisible] = useState(false);
 
   const handleSignUp = async () => {
     if (!form.username || !form.email || !form.password) {
@@ -51,12 +55,16 @@ export default function Register() {
         router.push(""); // Redirect ke halaman login atau halaman berikutnya
       }
     } catch (error) {
-      // Tangani error jika terjadi
-      console.error(error);
-      Alert.alert(
-        "Error",
-        "There was an error registering your account. Please try again."
-      );
+      setErrorStatus(error.status);
+      if ([409].includes(error.status)) {
+        setVisible(true);
+      } else {
+        console.error(error);
+        Alert.alert(
+          "Error",
+          "There was an error registering your account. Please try again."
+        );
+      }
     }
   };
 
@@ -98,6 +106,7 @@ export default function Register() {
         </Text >
       </View>
       <SubmitButton text="Sign Up" onPress={handleSignUp} />
+      <ErrorPopOut errorStatus={errorStatus} visible={visible} setVisible={setVisible} />
     </>
   );
 }

@@ -2,12 +2,15 @@ import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function ErrorPopOut({ visible, setVisible, errorStatus }) {
     const message = () => {
-        if (errorStatus == 401) {
-            return 'Your password is incorrect.';
+        switch (errorStatus) {
+            case 401:
+                return 'Your password is incorrect.';
+            case 404:
+                return 'Account is not found.';
+            case 409:
+                return 'Account is already exist. Use another email or username.';
         }
-        if (errorStatus == 404) {
-            return 'Account is not found.';
-        }
+
         return errorStatus
     }
     return (

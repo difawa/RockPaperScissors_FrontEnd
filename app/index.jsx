@@ -42,11 +42,15 @@ export default function App() {
 
       router.replace("/main-menu");
     } catch (error) {
-      console.error(error);
       setErrorStatus(error.status)
       if ([401, 404].includes(error.status)) {
         setVisible(true);
+      } else if (error.code == "ERR_NETWORK") {
+        Alert.alert(
+          "Network Error",
+          "Please check your internet connection and try again.")
       } else {
+        console.error(error);
         Alert.alert(
           "Login Error",
           error.response?.data?.message || "An error occurred during login."
