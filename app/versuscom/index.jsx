@@ -210,23 +210,23 @@ export default function VersusCom() {
         />
         <View style={{ position: "absolute", alignItems: "center" }}>
           {choices.com === "paper" && (
-            <Image source={comPaper} style={{ width: 100 }} />
+            <Image source={comPaper} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
           {choices.com === "rock" && (
-            <Image source={comRock} style={{ width: 100 }} />
+            <Image source={comRock} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
           {choices.com === "scissors" && (
-            <Image source={comScissors} style={{ width: 100 }} />
+            <Image source={comScissors} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
           <Text style={styles.textResult}>{result}</Text>
           {choices.user === "paper" && (
-            <Image source={userPaper} style={{ width: 100 }} />
+            <Image source={userPaper} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
           {choices.user === "rock" && (
-            <Image source={userRock} style={{ width: 100 }} />
+            <Image source={userRock} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
           {choices.user === "scissors" && (
-            <Image source={userScissors} style={{ width: 100 }} />
+            <Image source={userScissors} style={{ width: 150, height: 150 }} resizeMode="contain" />
           )}
         </View>
       </View>
