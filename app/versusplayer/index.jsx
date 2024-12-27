@@ -22,6 +22,8 @@ import comRock from "../../assets/images/comrock.png";
 import comScissors from "../../assets/images/comscissors.png";
 import Score from "../../components/Score";
 import { BASE_URL } from "@env";
+import { Audio } from "expo-av";
+import EndGamePopOut from "../../components/EndGamePopOut";
 
 export default function VersusPlayer() {
   const [choices, setChoices] = useState({ user: "", opponent: "" });
@@ -31,42 +33,90 @@ export default function VersusPlayer() {
   const [gameId, setGameId] = useState(null);
   const [userId, setUserId] = useState(null);
   const [rounds, setRounds] = useState(0);
+  const [audioFiles, setAudioFiles] = useState({});
+  const [visiblePopOut, setVisiblePopOut] = useState(false);
+  const [finalGame, setFinalGame] = useState("");
+
+  const preloadAudios = async () => {
+    const audioPaths = {
+      handOfFate: require("../../assets/audio/HandofFate.mp3"),
+      rock: require("../../assets/audio/rock.mp3"),
+      paper: require("../../assets/audio/paper.mp3"),
+      scissors: require("../../assets/audio/scissors.mp3"),
+      win: require("../../assets/audio/win.mp3"),
+      lose: require("../../assets/audio/lose.mp3"),
+      draw: require("../../assets/audio/draw.mp3"),
+    };
+
+    const loadedAudios = {};
+    for (const [key, path] of Object.entries(audioPaths)) {
+      const { sound } = await Audio.Sound.createAsync(path);
+      loadedAudios[key] = sound;
+    }
+
+    setAudioFiles(loadedAudios);
+  };
 
   useEffect(() => {
-    // Ambil userId dari AsyncStorage
+    if (audioFiles.handOfFate) {
+      playAudio("handOfFate");
+    }
+  }, [audioFiles]);
+
+  const playAudio = async (key) => {
+    if (audioFiles[key]) {
+      await audioFiles[key].replayAsync(); // Play the sound from the start
+    } else {
+      console.log("Audio not found");
+    }
+  };
+
+  useEffect(() => {
+    preloadAudios();
+
+    return () => {
+      // Cleanup all audio files
+      Object.values(audioFiles).forEach((sound) => {
+        if (sound) {
+          sound.unloadAsync();
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchUserId = async () => {
       try {
         const storedUserId = await AsyncStorage.getItem("userId");
         if (storedUserId) {
           setUserId(parseInt(storedUserId, 10)); // Konversi ke integer
+          console.log("User ID fetched from AsyncStorage:", storedUserId);
         }
       } catch (error) {
-        console.error("Gagal mengambil userId dari AsyncStorage:", error);
+        console.error("Failed to fetch userId from AsyncStorage:", error);
       }
     };
 
     fetchUserId();
 
-    // Inisialisasi koneksi socket
-    const newSocket = io(`${BASE_URL}`, {
-      transports: ["websocket"],
-    });
+    const newSocket = io(`${BASE_URL}`, { transports: ["websocket"] });
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      console.log("Terkoneksi ke server");
-      if (userId) {
-        newSocket.emit("joinGame", { userId }); // Kirim userId saat bergabung
-      }
+      console.log("Connected to server");
     });
 
     newSocket.on("gameStarted", (data) => {
-      console.log("Game dimulai:", data);
+      console.log("Game started:", data);
       setGameId(data.gameId);
     });
 
     newSocket.on("roundResult", (data) => {
-      console.log("Hasil ronde diterima:", data);
+      console.log("Round result received:", data);
+      if (!data || !data.choices || !data.scores) {
+        console.error("Invalid round result data:", data);
+        return;
+      }
 
       setChoices({
         user: data.choices[userId],
@@ -106,13 +156,34 @@ export default function VersusPlayer() {
   }, [userId]);
 
   useEffect(() => {
+    if (socket && userId) {
+      console.log("Sending joinGame with userId:", userId);
+      socket.emit("joinGame", { userId });
+    }
+  }, [socket, userId]);
+
+  useEffect(() => {
     if (scores.user === 3 || scores.opponent === 3 || rounds === 5) {
+      let winner = "";
+
       if (scores.user === scores.opponent) {
         Alert.alert("Game Over", "It's a draw!");
+        playAudio("draw");
+        winner = "draw";
       } else {
-        const winner = scores.user > scores.opponent ? "You" : "Opponent";
-        Alert.alert("Game Over", `${winner} won the match!`);
+        const gameWinner = scores.user > scores.opponent ? "user1" : "user2"; // user1 = You, user2 = Opponent
+        const winnerName = gameWinner === "user1" ? "You" : "Opponent";
+        Alert.alert("Game Over", `${winnerName} won the match!`);
+        if (gameWinner === "user1") {
+          playAudio("win");
+        } else {
+          playAudio("lose");
+        }
+        winner = gameWinner;
       }
+
+      setFinalGame(winner);
+      setVisiblePopOut(true);
     }
   }, [scores, rounds]);
 
@@ -126,7 +197,8 @@ export default function VersusPlayer() {
       Alert.alert("Game Over", "The match has already ended.");
       return;
     }
-
+    playAudio(userChoice);
+    console.log("Player choice sent:", userChoice);
     socket.emit("playerChoice", { gameId, userId, choice: userChoice });
     setChoices((prev) => ({ ...prev, user: userChoice }));
     setResult("Waiting for opponent...");
@@ -189,6 +261,7 @@ export default function VersusPlayer() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
+      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} finalGame={finalGame} />
     </>
   );
 }
