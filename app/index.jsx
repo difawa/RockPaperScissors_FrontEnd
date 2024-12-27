@@ -20,10 +20,8 @@ export default function App() {
 
   const handleSignIn = async () => {
     if (!form.email || !form.password) {
-      Alert.alert(
-        "Validation Error",
-        "Please fill in all fields before signing in."
-      );
+      setErrorStatus(400);
+      setVisible(true);
       return;
     }
 

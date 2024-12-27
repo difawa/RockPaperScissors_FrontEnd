@@ -17,21 +17,18 @@ export default function Register() {
 
   const handleSignUp = async () => {
     if (!form.username || !form.email || !form.password) {
-      Alert.alert(
-        "Validation Error",
-        "Please fill in all fields before signing up."
-      );
+      setErrorStatus(400);
+      setVisible(true);
       return;
     } else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)
     ) {
-      Alert.alert("Validation Error", "Please enter a valid email address.");
+      setErrorStatus('email');
+      setVisible(true);
       return;
     } else if (form.password.length < 6) {
-      Alert.alert(
-        "Validation Error",
-        "Password must be at least 6 characters."
-      );
+      setErrorStatus('password');
+      setVisible(true);
       return;
     }
 
