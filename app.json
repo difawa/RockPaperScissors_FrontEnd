@@ -5,11 +5,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "RockPaperScissors_FrontEnd",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/favicon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/logo.png",
+      "image": "./assets/images/favicon.png",
       "resizeMode": "contain",
       "backgroundColor": "#1A1C22"
     },
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/favicon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.difawa.RockPaperScissors_FrontEnd"
@@ -32,9 +32,9 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#fff",
-          "image": "./assets/images/logo.png",
+          "image": "./assets/images/favicon.png",
           "dark": {
-            "image": "./assets/images/logo.png",
+            "image": "./assets/images/favicon.png",
             "backgroundColor": "#000000"
           },
           "imageWidth": 200

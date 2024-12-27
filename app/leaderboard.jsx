@@ -107,9 +107,11 @@ export default function Leaderboard() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.arrow}>
       <TouchableOpacity onPress={() => router.push("/main-menu")}>
-        <Image source={Arrow} style={styles.arrow} />
+        <Image source={Arrow} />
       </TouchableOpacity>
+      </View>
 
       <Text style={styles.leaderboardtext}>LEADERBOARD</Text>
       {/* top 3 */}
@@ -154,7 +156,7 @@ export default function Leaderboard() {
 
       <View style={styles.flatlistContainer}>
         <FlatList
-          style={{ height: 450 }}
+          style={{ height: 300 }} 
           data={others}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
@@ -200,7 +202,7 @@ export default function Leaderboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1A1C22",
+    width: '100%'
   },
   arrow: {
     alignSelf: "flex-end",
@@ -237,7 +239,7 @@ const styles = StyleSheet.create({
   },
   topText: {
     top: -10,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "bold",
     color: "white",
   },
@@ -286,7 +288,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   nameText: {
-    fontSize: 12,
+    fontSize: 13,
     color: "#ffffff",
     marginLeft: 15,
     fontWeight: "bold",

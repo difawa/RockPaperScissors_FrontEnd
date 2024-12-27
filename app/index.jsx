@@ -7,18 +7,21 @@ import { BASE_URL } from "@env";
 
 import InputBox from "../components/InputBox";
 import SubmitButton from "../components/SubmitButton";
+import ErrorPopOut from "../components/ErrorPopOut";
 
 export default function App() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [hidepassword, setHidePassword] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [errorStatus, setErrorStatus] = useState();
+
   const router = useRouter();
+
 
   const handleSignIn = async () => {
     if (!form.email || !form.password) {
-      Alert.alert(
-        "Validation Error",
-        "Please fill in all fields before signing in."
-      );
+      setErrorStatus(400);
+      setVisible(true);
       return;
     }
 
@@ -35,14 +38,22 @@ export default function App() {
       await AsyncStorage.setItem("userId", userId.toString());
       await AsyncStorage.setItem("username", username);
 
-      Alert.alert("Success", "Next, let's play the game!");
       router.replace("/main-menu");
     } catch (error) {
-      console.error(error);
-      Alert.alert(
-        "Login Error",
-        error.response?.data?.message || "An error occurred during login."
-      );
+      setErrorStatus(error.status)
+      if ([401, 404].includes(error.status)) {
+        setVisible(true);
+      } else if (error.code == "ERR_NETWORK") {
+        Alert.alert(
+          "Network Error",
+          "Please check your internet connection and try again.")
+      } else {
+        console.error(error);
+        Alert.alert(
+          "Login Error",
+          error.response?.data?.message || "An error occurred during login."
+        );
+      }
     }
   };
 
@@ -78,6 +89,7 @@ export default function App() {
         </Text>
       </View>
       <SubmitButton text="Sign In" onPress={handleSignIn} />
+      <ErrorPopOut visible={visible} setVisible={setVisible} errorStatus={errorStatus} />
     </>
   );
 }
