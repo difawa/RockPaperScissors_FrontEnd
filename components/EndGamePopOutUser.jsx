@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Text, Modal, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function EndGamePopOut({ visible, setVisible, finalGame }) {
@@ -77,7 +70,7 @@ export default function EndGamePopOut({ visible, setVisible, finalGame }) {
           {/* Tombol */}
           <TouchableOpacity
             style={styles.playAgain}
-            onPress={() => router.replace("/versuscom")}
+            onPress={() => router.replace("/versususer")}
           >
             <Text style={styles.closeButtonText}>PLAY AGAIN</Text>
           </TouchableOpacity>
