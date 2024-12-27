@@ -20,7 +20,7 @@ import userScissors from "../../assets/images/userscissors.png";
 import comPaper from "../../assets/images/compaper.png";
 import comRock from "../../assets/images/comrock.png";
 import comScissors from "../../assets/images/comscissors.png";
-import Score from "../../components/Score";
+import Score from "../../components/ScoreUser";
 import { BASE_URL } from "@env";
 import { Audio } from "expo-av";
 import EndGamePopOut from "../../components/EndGamePopOut";
@@ -261,7 +261,11 @@ export default function VersusPlayer() {
           <Image source={paper} resizeMode="contain" style={{ width: 100 }} />
         </TouchableOpacity>
       </View>
-      <EndGamePopOut visible={visiblePopOut} setVisible={setVisiblePopOut} finalGame={finalGame} />
+      <EndGamePopOut
+        visible={visiblePopOut}
+        setVisible={setVisiblePopOut}
+        finalGame={finalGame}
+      />
     </>
   );
 }
